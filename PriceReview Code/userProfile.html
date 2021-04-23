@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <meta charset="utf-8">
+        <title>Profile Page</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+           <script src="js/userprofile.js"></script>
+             <script src="js/login.js"></script>
+             <script src="js/editProfile.js"></script>
+             <script src="js/md5.js"></script>
+             <script src="js/login.js"></script>
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="shortcut icon" href="img/logo.png"/>
+        <style type="text/css">body { margin-top: 20px; color: #1a202c; text-align: left; background-color: #e2e8f0; } .main-body { padding: 15px; } .card { box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06); } .card { position: relative; display: flex; flex-direction: column; min-width: 0; word-wrap: break-word; background-color: #fff; background-clip: border-box; border: 0 solid rgba(0,0,0,.125); border-radius: .25rem; } .card-body { flex: 1 1 auto; min-height: 1px; padding: 1rem; } .gutters-sm { margin-right: -8px; margin-left: -8px; } .gutters-sm>.col, .gutters-sm>[class*=col-] { padding-right: 8px; padding-left: 8px; } .mb-3, .my-3 { margin-bottom: 1rem!important; } .bg-gray-300 { background-color: #e2e8f0; } .h-100 { height: 100%!important; } .shadow-none { box-shadow: none!important; }</style>
+    </head>
+    <body onload="userprofile();">
+        <nav class="bg-white navbar navbar-expand-lg border navbar-light py-lg-1">
+            <div class="container">
+                <a href="dashboard.html"><img src="img/logo.png" class="font-weight-bold navbar-brand text-dark"></a>
+            
+                <ul class="flex-row ml-auto navbar-nav order-lg-1 pl-2 pr-2">
+                    
+                    <li class="nav-item">
+</li>
+                    
+                </ul>
+              
+                <div class="collapse navbar-collapse " id="navbarNavDropdown-3">
+                    <ul class="ml-auto navbar-nav">
+              <li class="nav-item"> 
+                            <a href="dashboard.html"  class="nav-link px-lg-3 py-lg-4">Home</a> 
+
+                        </li> 
+                <li class="nav-item"> 
+                            <a href="#" onclick="logout();" class="nav-link px-lg-3 py-lg-4">Logout</a> 
+                        </li>   
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="main-body">
+                <div class="row gutters-sm">
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex flex-column align-items-center text-center">
+                                    <div>
+                                    <img src="" alt="Blank Picture" class="rounded-circle" height="200" width="200" id="imgframe">
+                                    </div><hr><hr>
+                                    <div class="d-flex flex-column align-items-center text-center">
+                                    <form method="POST" action="src/AddUserPic.php" enctype='multipart/form-data'>
+                                    <input type="text" name="customerid" id="customerid" style="font-size: 0.001em" />
+                                    <input type="file" name="file" style="font-size: 0.5em" />
+                                    <input type='submit' value='Upload picture' name='but_upload' style="font-size: 1.3em">
+                                        </form>
+                                    </div>
+                                    <div class="mt-3">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mt-3">
+                            <ul class="list-group list-group-flush">
+                                
+                                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                    <h6 class="mb-0"> <div class="fa fa-wrench pr-2" aria-hidden="true"></div><a href="#" data-toggle="modal" data-target="#myModalEditPro" onclick="fillModal();">Edit profile</h6></a>
+                                    <span class="text-secondary"></span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                    <h6 class="mb-0"> <div class="fa fa-sign-out pr-2" aria-hidden="true"></div><a href="#" onclick="deactivateAcc();">Deactivate Account</h6></a>
+                                    <span class="text-secondary"></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Full Name</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary" id="displayFullname">
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Email</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary" id="email">                                        
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Phone</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary" id="phone">
+                                       
+</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row gutters-sm">
+                            <div class="col-sm-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2" id="rating" style="font-size: 1.6em"></i></h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mb-3">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                     <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2" id="reviews" style="font-size: 1.6em"></i></h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+          <div class="container"> 
+        <!-- Modal -->         
+        <div class="modal fade" id="myModalEditPro" role="dialog"> 
+            <div class="modal-dialog"> 
+                <!-- Edit profile Modal -->                 
+                <div class="modal-content"> 
+                    <div class="modal-header"> 
+                        <h4 class="modal-title">Edit Profile</h4> 
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>                         
+                    </div>                     
+                    <div class="modal-body"> 
+                        <form class="form-group"> 
+                            <label for="codelab">Email Address</label>
+                            <input type="text" class="form-control" id="emailaddress" placeholder="" readonly="readonly">
+                            <label for="emailab">User Name</label>                             
+                            <input type="text" class="form-control" id="userName" placeholder="">                      
+                            <label for="emailab">Phone number</label>  
+                            <input type="text" class="form-control" id="phonenumber" placeholder="">  
+                            <label for="emailab">new password</label>                            
+                            <input type="password" class="form-control" id="resNewPass" placeholder="New password"> 
+                            <label for="emailab">Confirm new password</label>                             
+                            <input type="password" class="form-control" id="ConfirmResNewPass" placeholder="Confirm new password"> 
+                            <p id="resPassStatus" style="font-size: 0.6em"></p> 
+                        </form>                         
+                    </div>                     
+                    <div class="modal-footer"> 
+                        <button type="button" class="btn btn-default" onclick="editProfile()">Edit profile</button>                                                  
+                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="window.location.reload()">Close</button>                         
+                    </div>                     
+                </div>                 
+            </div>             
+        </div>         
+    </div>  
+        
+        
+        
+        
+        
+        <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="http://netdna.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+         <p id="error" style="font-size: 0.5em"></p> 
+         
+          <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>     
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>   
+        <footer class="bg-dark pt-0 text-white fixed-bottom">
+            <div class="container">
+                <div class="pb-3 pt-3 small">
+                    <div class="align-items-center row">
+                        <div class="col-md pb-2 pt-2">
+                            <p class="mb-0">&copy; All Rights Reserved - <a href="https://github.com/CSTeam19/TeamProject">Price Review</a> by <a href="https://github.com/CSTeam19">Team19</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </footer>
+    </body>
+</html>
